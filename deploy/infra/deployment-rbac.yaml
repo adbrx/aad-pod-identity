@@ -247,7 +247,7 @@ spec:
         image: "mcr.microsoft.com/oss/azure/aad-pod-identity/mic:v1.7.4"
         imagePullPolicy: Always
         args:
-          - "--cloudconfig=/etc/kubernetes/azure.json"
+          - "--cloudconfig=/etc/kubernetes/conf/kube-cloud-config"
           - "--logtostderr"
         securityContext:
           runAsUser: 0
@@ -265,7 +265,7 @@ spec:
             memory: 256Mi
         volumeMounts:
         - name: k8s-azure-file
-          mountPath: /etc/kubernetes/azure.json
+          mountPath: /etc/kubernetes/conf/kube-cloud-config
           readOnly: true
         livenessProbe:
           httpGet:
@@ -276,6 +276,6 @@ spec:
       volumes:
       - name: k8s-azure-file
         hostPath:
-          path: /etc/kubernetes/azure.json
+          path: /etc/kubernetes/conf/kube-cloud-config
       nodeSelector:
         kubernetes.io/os: linux
